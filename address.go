@@ -13,9 +13,9 @@ import (
 
 	"github.com/decred/dcrd/chaincfg"
 	"github.com/decred/dcrd/chaincfg/chainec"
-	"github.com/decred/dcrutil/base58"
 	"github.com/decred/dcrd/crypto"
 	"github.com/decred/dcrd/crypto/bliss"
+	"github.com/decred/dcrutil/base58"
 )
 
 var (
@@ -767,7 +767,6 @@ func (a *AddressSecSchnorrPubKey) DSA(net *chaincfg.Params) int {
 func (a *AddressSecSchnorrPubKey) Net() *chaincfg.Params {
 	return a.net
 }
-
 
 // AddressSecSchnorrPubKey is an Address for a secp256k1 pay-to-pubkey
 // transaction.

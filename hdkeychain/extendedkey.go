@@ -18,15 +18,16 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
+	"strings"
 
+	"github.com/LoCCS/bliss"
+	"github.com/LoCCS/bliss/sampler"
 	"github.com/decred/dcrd/chaincfg"
 	"github.com/decred/dcrd/chaincfg/chainec"
 	"github.com/decred/dcrd/chaincfg/chainhash"
 	dcrcrypto "github.com/decred/dcrd/crypto/bliss"
 	"github.com/decred/dcrutil"
 	"github.com/decred/dcrutil/base58"
-	"github.com/LoCCS/bliss"
-	"github.com/LoCCS/bliss/sampler"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -51,15 +52,15 @@ const (
 
 	// serializedKeyLen is the length of a serialized public or private
 	// extended key.  It consists of 4 bytes version, 1 byte depth, 4 bytes
- 	// fingerprint, 4 bytes child number, 32 bytes chain code, and 33 bytes
- 	// public/private key data.
-	serializedKeyLen = 4 + 1 + 1 + 4 + 4 + 32 + 33 // 79 bytes
-	serializedKeyLenForTest = 4 + 1 + 4 + 4 + 32 + 33 // 78 bytes
-	blissserializedPubKeyLen = 4 + 1 + 1 + 4 + 4 + 32 + 897
-	blissserializedPrivKeyLen = 4 + 1 + 1 + 4 + 4 + 32 + 386
-	keyEc 	   uint8 = 0
-	keyBliss   uint8 = 1
-	BlissPubKeyLen = 897
+	// fingerprint, 4 bytes child number, 32 bytes chain code, and 33 bytes
+	// public/private key data.
+	serializedKeyLen                = 4 + 1 + 1 + 4 + 4 + 32 + 33 // 79 bytes
+	serializedKeyLenForTest         = 4 + 1 + 4 + 4 + 32 + 33     // 78 bytes
+	blissserializedPubKeyLen        = 4 + 1 + 1 + 4 + 4 + 32 + 897
+	blissserializedPrivKeyLen       = 4 + 1 + 1 + 4 + 4 + 32 + 386
+	keyEc                     uint8 = 0
+	keyBliss                  uint8 = 1
+	BlissPubKeyLen                  = 897
 )
 
 var (
@@ -72,7 +73,6 @@ var (
 
 	ErrDerivePublicFromPublic = errors.New("cannot derive a public key " +
 		"from a public key")
-
 
 	// ErrNotPrivExtKey describes an error in which the caller attempted
 	// to extract a private key from a public extended key.
@@ -219,15 +219,15 @@ func (k *ExtendedKey) ParentFingerprint() uint32 {
 func (k *ExtendedKey) Child(i uint32) (*ExtendedKey, error) {
 	var isPrivate bool
 	var childKey []byte
-	childChainCode :=make([]byte, 32)
-	switch k.algtype{
+	childChainCode := make([]byte, 32)
+	switch k.algtype {
 	case keyBliss:
-		if !k.isPrivate  {
+		if !k.isPrivate {
 			return nil, ErrDerivePublicFromPublic
 		}
 		isPrivate = true
 		keyLen := BlissPubKeyLen
-		data := make([]byte, keyLen + 4)
+		data := make([]byte, keyLen+4)
 		copy(data, k.pubKeyBytes())
 		binary.BigEndian.PutUint32(data[keyLen:], i)
 		hmac512 := hmac.New(sha512.New, k.chainCode)
@@ -240,12 +240,15 @@ func (k *ExtendedKey) Child(i uint32) (*ExtendedKey, error) {
 		if err != nil {
 			return nil, err
 		}
-		privKey ,err := bliss.GeneratePrivateKey(1, entropy)
-		if err != nil{
+		privKey, err := bliss.GeneratePrivateKey(1, entropy)
+		if err != nil && strings.Contains(err.Error(), "invertible polynomial") {
+			return nil, ErrInvalidChild
+		}
+		if err != nil {
 			return nil, err
 		}
 		childKey = privKey.Serialize()
-	default :
+	default:
 		// There are four scenarios that could happen here:
 		// 1) Private extended key -> Hardened child private extended key
 		// 2) Private extended key -> Non-hardened child private extended key
@@ -446,7 +449,7 @@ func (k *ExtendedKey) String() (string, error) {
 
 	var childNumBytes [4]byte
 	depthByte := byte(k.depth % 256)
-	typeByte  := byte(k.algtype)
+	typeByte := byte(k.algtype)
 	binary.BigEndian.PutUint32(childNumBytes[:], k.childNum)
 
 	// The serialized format is:
@@ -523,7 +526,7 @@ func (k *ExtendedKey) Zero() {
 	k.isPrivate = false
 }
 
-func (k *ExtendedKey) GetAlgType() uint8{
+func (k *ExtendedKey) GetAlgType() uint8 {
 	return k.algtype
 }
 
@@ -566,7 +569,7 @@ func NewMaster(seed []byte, net *chaincfg.Params) (*ExtendedKey, error) {
 
 	parentFP := []byte{0x00, 0x00, 0x00, 0x00}
 	return newExtendedKey(net.HDPrivateKeyID[:], secretKey, chainCode,
-		parentFP, 0, 0, true, 0),nil
+		parentFP, 0, 0, true, 0), nil
 }
 
 // NewKeyFromString returns a new extended key instance from a base58-encoded
@@ -575,7 +578,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	// The base58-decoded extended key must consist of a serialized payload
 	// plus an additional 4 bytes for the checksum.
 	decoded := base58.Decode(key)
-	if len(decoded) != serializedKeyLen+4 && len(decoded) != blissserializedPubKeyLen + 4  && len(decoded) != blissserializedPrivKeyLen +4 && len(decoded) != serializedKeyLenForTest+4 {
+	if len(decoded) != serializedKeyLen+4 && len(decoded) != blissserializedPubKeyLen+4 && len(decoded) != blissserializedPrivKeyLen+4 && len(decoded) != serializedKeyLenForTest+4 {
 		return nil, ErrInvalidKeyLen
 	}
 
@@ -599,7 +602,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	childNum := binary.BigEndian.Uint32(payload[10:14])
 	chainCode := payload[14:46]
 	keyData := payload[46:]
-	if len(decoded) == serializedKeyLenForTest+4{
+	if len(decoded) == serializedKeyLenForTest+4 {
 		version = payload[:4]
 		depth = uint16(payload[4:5][0])
 		algtype = uint8(keyEc)
@@ -612,37 +615,37 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	// compressed pubkeys either start with 0x02 or 0x03.
 	isPrivate := keyData[0] == 0x00
 	if algtype == keyBliss {
-		isPrivate = len(decoded) == blissserializedPrivKeyLen + 4
+		isPrivate = len(decoded) == blissserializedPrivKeyLen+4
 	}
 	if isPrivate {
 		// Ensure the private key is valid.  It must be within the range
 		// of the order of the secp256k1 curve and not be 0.
 		keyData = keyData[1:]
 		switch {
-		case algtype == keyEc :
+		case algtype == keyEc:
 			keyNum := new(big.Int).SetBytes(keyData)
 			if keyNum.Cmp(chainec.Secp256k1.GetN()) >= 0 || keyNum.Sign() == 0 {
 				return nil, ErrUnusableSeed
 			}
-		case algtype == keyBliss :
+		case algtype == keyBliss:
 			//TODO
 		default:
 			return nil, ErrUnknownAlg
- 		}
+		}
 	} else {
 		switch {
-		case algtype == keyEc :
+		case algtype == keyEc:
 			// Ensure the public key parses correctly and is actually on the
 			// secp256k1 curve.
 			_, err := chainec.Secp256k1.ParsePubKey(keyData)
 			if err != nil {
 				return nil, err
 			}
-		case algtype == keyBliss :
+		case algtype == keyBliss:
 			// TODO
 		default:
 			return nil, ErrUnknownAlg
- 		}
+		}
 	}
 
 	return newExtendedKey(version, keyData, chainCode, parentFP, depth,
@@ -689,20 +692,20 @@ func (k *ExtendedKey) SwitchChild(i uint32, acctype uint8) (*ExtendedKey, error)
 	//   Ir = child chain code
 	il := ilr[:len(ilr)/2]
 	copy(childChainCode, ilr[len(ilr)/2:])
-	switch acctype{
-	case keyBliss :
+	switch acctype {
+	case keyBliss:
 		entropyrand := sha3.Sum512(il)
 		entropy, err := sampler.NewEntropy(entropyrand[:])
-		if err != nil{
+		if err != nil {
 			return nil, err
 		}
-		privKey ,err := bliss.GeneratePrivateKey(1, entropy)
-		if err != nil{
+		privKey, err := bliss.GeneratePrivateKey(1, entropy)
+		if err != nil {
 			return nil, err
 		}
 		childKey = privKey.Serialize()
 
-	default :
+	default:
 		// Both derived public or private keys rely on treating the left 32-byte
 		// sequence calculated above (Il) as a 256-bit integer that must be
 		// within the valid range for a secp256k1 private key.  There is a small
