@@ -2,7 +2,7 @@ package: github.com/decred/dcrutil
 import:
 - package: github.com/decred/dcrd
   repo: git@github.com:hybridnetwork/hxd
-  version: post-quataum
+  version: bogrod-pqdev
   subpackages:
   - blockchain
   - chaincfg
