@@ -20,14 +20,14 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/LoCCS/bliss"
-	"github.com/LoCCS/bliss/sampler"
 	"github.com/decred/dcrd/chaincfg"
 	"github.com/decred/dcrd/chaincfg/chainec"
 	"github.com/decred/dcrd/chaincfg/chainhash"
 	dcrcrypto "github.com/decred/dcrd/crypto/bliss"
 	"github.com/decred/dcrutil"
 	"github.com/decred/dcrutil/base58"
+	"github.com/hybridnetwork/bliss"
+	"github.com/hybridnetwork/bliss/sampler"
 	"golang.org/x/crypto/sha3"
 )
 
