@@ -9,7 +9,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/decred/dcrutil/base58"
+	"github.com/hybridnetwork/hxutil/base58"
 )
 
 func BenchmarkBase58Encode(b *testing.B) {

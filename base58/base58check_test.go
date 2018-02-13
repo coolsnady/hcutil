@@ -8,7 +8,7 @@ package base58_test
 import (
 	"testing"
 
-	"github.com/decred/dcrutil/base58"
+	"github.com/hybridnetwork/hxutil/base58"
 )
 
 var checkEncodingStringTests = []struct {

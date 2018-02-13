@@ -10,9 +10,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/decred/dcrd/chaincfg/chainhash"
-	"github.com/decred/dcrd/wire"
-	"github.com/decred/dcrutil/bloom"
+	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
+	"github.com/hybridnetwork/hxd/wire"
+	"github.com/hybridnetwork/hxutil/bloom"
 )
 
 // This example demonstrates how to create a new bloom filter, add a transaction

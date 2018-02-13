@@ -8,7 +8,7 @@ package base58_test
 import (
 	"fmt"
 
-	"github.com/decred/dcrutil/base58"
+	"github.com/hybridnetwork/hxutil/base58"
 )
 
 // This example demonstrates how to decode modified base58 encoded data.

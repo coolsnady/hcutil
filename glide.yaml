@@ -1,8 +1,8 @@
-package: github.com/decred/dcrutil
+package: github.com/hybridnetwork/hxutil
 import:
-- package: github.com/decred/dcrd
+- package: github.com/hybridnetwork/hxd
   repo: git@github.com:hybridnetwork/hxd
-  version: bogrod-pqdev
+  version: dev-v0.0.1
   subpackages:
   - blockchain
   - chaincfg

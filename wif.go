@@ -9,11 +9,11 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/decred/dcrd/chaincfg"
-	"github.com/decred/dcrd/chaincfg/chainec"
-	"github.com/decred/dcrd/chaincfg/chainhash"
-	"github.com/decred/dcrd/crypto/bliss"
-	"github.com/decred/dcrutil/base58"
+	"github.com/hybridnetwork/hxd/chaincfg"
+	"github.com/hybridnetwork/hxd/chaincfg/chainec"
+	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
+	"github.com/hybridnetwork/hxd/crypto/bliss"
+	"github.com/hybridnetwork/hxutil/base58"
 )
 
 // ErrMalformedPrivateKey describes an error where a WIF-encoded private

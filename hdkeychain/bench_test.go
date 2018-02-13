@@ -8,7 +8,7 @@ package hdkeychain_test
 import (
 	"testing"
 
-	"github.com/decred/dcrutil/hdkeychain"
+	"github.com/hybridnetwork/hxutil/hdkeychain"
 )
 
 // bip0032MasterPriv1 is the master private extended key from the first set of
