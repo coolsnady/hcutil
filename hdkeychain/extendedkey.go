@@ -58,8 +58,8 @@ const (
 	serializedKeyLenForTest         = 4 + 1 + 4 + 4 + 32 + 33     // 78 bytes
 	blissserializedPubKeyLen        = 4 + 1 + 1 + 4 + 4 + 32 + 897
 	blissserializedPrivKeyLen       = 4 + 1 + 1 + 4 + 4 + 32 + 386
-	keyEc                     uint8 = 0
-	keyBliss                  uint8 = 1
+	keyEc                     uint32 = 0
+	keyBliss                  uint32 = 1
 	BlissPubKeyLen                  = 897
 )
 
@@ -123,14 +123,14 @@ type ExtendedKey struct {
 	childNum  uint32
 	version   []byte
 	isPrivate bool
-	algtype   uint8
+	algtype   uint32
 }
 
 // newExtendedKey returns a new instance of an extended key with the given
 // fields.  No error checking is performed here as it's only intended to be a
 // convenience method used to create a populated struct.
 func newExtendedKey(version, key, chainCode, parentFP []byte, depth uint16,
-	childNum uint32, isPrivate bool, algtype uint8) *ExtendedKey {
+	childNum uint32, isPrivate bool, algtype uint32) *ExtendedKey {
 
 	// NOTE: The pubKey field is intentionally left nil so it is only
 	// computed and memoized as required.
@@ -423,7 +423,7 @@ func (k *ExtendedKey) ECPrivKey() (chainec.PrivateKey, error) {
 
 // Address converts the extended key to a standard decred pay-to-pubkey-hash
 // address for the passed network.
-func (k *ExtendedKey) Address(net *chaincfg.Params, addrtype uint8) (*dcrutil.AddressPubKeyHash, error) {
+func (k *ExtendedKey) Address(net *chaincfg.Params, addrtype uint32) (*dcrutil.AddressPubKeyHash, error) {
 	pkHash := dcrutil.Hash160(k.pubKeyBytes())
 	if addrtype == 1 {
 		return dcrutil.NewAddressPubKeyHash(pkHash, net, 4)
@@ -526,11 +526,11 @@ func (k *ExtendedKey) Zero() {
 	k.isPrivate = false
 }
 
-func (k *ExtendedKey) GetAlgType() uint8 {
+func (k *ExtendedKey) GetAlgType() uint32 {
 	return k.algtype
 }
 
-func (k *ExtendedKey) SetAlgType(i uint8) {
+func (k *ExtendedKey) SetAlgType(i uint32) {
 	k.algtype = i
 }
 
@@ -597,7 +597,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	// Deserialize each of the payload fields.
 	version := payload[:4]
 	depth := uint16(payload[4:5][0])
-	algtype := uint8(payload[5])
+	algtype := uint32(payload[5])
 	parentFP := payload[6:10]
 	childNum := binary.BigEndian.Uint32(payload[10:14])
 	chainCode := payload[14:46]
@@ -605,7 +605,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	if len(decoded) == serializedKeyLenForTest+4 {
 		version = payload[:4]
 		depth = uint16(payload[4:5][0])
-		algtype = uint8(keyEc)
+		algtype = uint32(keyEc)
 		parentFP = payload[5:9]
 		childNum = binary.BigEndian.Uint32(payload[9:13])
 		chainCode = payload[13:45]
@@ -673,7 +673,7 @@ func GenerateSeed(length uint8) ([]byte, error) {
 	return buf, nil
 }
 
-func (k *ExtendedKey) SwitchChild(i uint32, acctype uint8) (*ExtendedKey, error) {
+func (k *ExtendedKey) SwitchChild(i uint32, acctype uint32) (*ExtendedKey, error) {
 	var childKey []byte
 	var isPrivate = true
 	childChainCode := make([]byte, 32)
