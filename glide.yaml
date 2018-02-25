@@ -2,7 +2,7 @@ package: github.com/hybridnetwork/hxutil
 import:
 - package: github.com/hybridnetwork/hxd
   repo: git@github.com:hybridnetwork/hxd
-  version: dev-v0.0.1
+  version: rc1.0
   subpackages:
   - blockchain
   - chaincfg
