@@ -14,5 +14,5 @@ const (
 
 	// MaxAmount is the maximum transaction amount allowed in atoms.
 	// Decred - Changeme for release
-	MaxAmount = 21e6 * AtomsPerCoin
+	MaxAmount = 21e7 * AtomsPerCoin
 )
