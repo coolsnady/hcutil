@@ -4,29 +4,28 @@
 // license that can be found in the LICENSE file.
 
 /*
-Package dcrutil provides decred-specific convenience functions and types.
+Package hxutil provides hx-specific convenience functions and types.
 
 Block Overview
 
-A Block defines a decred block that provides easier and more efficient
+A Block defines a hx block that provides easier and more efficient
 manipulation of raw wire protocol blocks.  It also memoizes hashes for the
 block and its transactions on their first access so subsequent accesses don't
 have to repeat the relatively expensive hashing operations.
 
 Tx Overview
 
-A Tx defines a decred transaction that provides more efficient manipulation of
+A Tx defines a hx transaction that provides more efficient manipulation of
 raw wire protocol transactions.  It memoizes the hash for the transaction on its
 first access so subsequent accesses don't have to repeat the relatively
 expensive hashing operations.
 
 Address Overview
 
-The Address interface provides an abstraction for a Decred address.  While the
-most common type is a pay-to-pubkey-hash, Decred already supports others and
+The Address interface provides an abstraction for a hx address.  While the
+most common type is a pay-to-pubkey-hash, hx already supports others and
 may well support more in the future.  This package currently provides
-implementations for the pay-to-pubkey, pay-to-pubkey-hash, and
-pay-to-script-hash address types.
+implementations for the pay-to-pubkey, pay-to-pubkey-hash, pay-to-script-hash and pay-to-alt-script-hash address types.
 
 To decode/encode an address:
 
@@ -44,4 +43,4 @@ To decode/encode an address:
 	}
 	fmt.Println(addr.EncodeAddress())
 */
-package dcrutil
+package hxutil
