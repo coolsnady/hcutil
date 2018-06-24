@@ -813,7 +813,7 @@ func (a *AddressBlissPubKey) EncodeAddress() string {
 // to a public key.  Setting the public key format will affect the output of
 // this function accordingly.  Part of the Address interface.
 func (a *AddressBlissPubKey) ScriptAddress() []byte {
-	return Hash160(a.serialize())
+	return a.serialize()
 }
 
 // Hash160 returns the underlying array of the pubkey hash.  This can be useful
