@@ -12,7 +12,7 @@ import (
 
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	"github.com/coolsnady/hcd/wire"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 	"github.com/coolsnady/hcutil/bloom"
 )
 
@@ -215,7 +215,7 @@ func TestFilterInsertWithTweak(t *testing.T) {
 func TestFilterInsertKey(t *testing.T) {
 	secret := "PtWU93QdrNBasyWA7GDJ3ycEN5aQRF69EynXJfmnyWDS4G7pzpEvN"
 
-	wif, err := dcrutil.DecodeWIF(secret)
+	wif, err := hcutil.DecodeWIF(secret)
 	if err != nil {
 		t.Errorf("TestFilterInsertKey DecodeWIF failed: %v", err)
 		return
@@ -223,7 +223,7 @@ func TestFilterInsertKey(t *testing.T) {
 
 	f := bloom.NewFilter(2, 0, 0.001, wire.BloomUpdateAll)
 	f.Add(wif.SerializePubKey())
-	f.Add(dcrutil.Hash160(wif.SerializePubKey()))
+	f.Add(hcutil.Hash160(wif.SerializePubKey()))
 
 	want, err := hex.DecodeString("03323f6e080000000000000001")
 	if err != nil {
@@ -260,7 +260,7 @@ func TestFilterBloomMatch(t *testing.T) {
 		t.Errorf("TestFilterBloomMatch DecodeString failure: %v", err)
 		return
 	}
-	tx, err := dcrutil.NewTxFromBytes(strBytes)
+	tx, err := hcutil.NewTxFromBytes(strBytes)
 	if err != nil {
 		t.Errorf("TestFilterBloomMatch NewTxFromBytes failure: %v", err)
 		return
@@ -279,7 +279,7 @@ func TestFilterBloomMatch(t *testing.T) {
 		t.Errorf("TestFilterBloomMatch DecodeString failure: %v", err)
 		return
 	}
-	spendingTx, err := dcrutil.NewTxFromBytes(spendingTxBytes)
+	spendingTx, err := hcutil.NewTxFromBytes(spendingTxBytes)
 	if err != nil {
 		t.Errorf("TestFilterBloomMatch NewTxFromBytes failure: %v", err)
 		return
@@ -569,7 +569,7 @@ func TestFilterInsertP2PubKeyOnly(t *testing.T) {
 		t.Errorf("TestFilterInsertP2PubKeyOnly DecodeString failed: %v", err)
 		return
 	}
-	block, err := dcrutil.NewBlockFromBytes(blockBytes)
+	block, err := hcutil.NewBlockFromBytes(blockBytes)
 	if err != nil {
 		t.Errorf("TestFilterInsertP2PubKeyOnly NewBlockFromBytes failed: %v", err)
 		return

@@ -13,25 +13,25 @@ import (
 	"testing"
 
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 	"github.com/coolsnady/hcutil/coinset"
 )
 
 type TestCoin struct {
 	TxHash     *chainhash.Hash
 	TxIndex    uint32
-	TxValue    dcrutil.Amount
+	TxValue    hcutil.Amount
 	TxNumConfs int64
 }
 
 func (c *TestCoin) Hash() *chainhash.Hash { return c.TxHash }
 func (c *TestCoin) Index() uint32         { return c.TxIndex }
-func (c *TestCoin) Value() dcrutil.Amount { return c.TxValue }
+func (c *TestCoin) Value() hcutil.Amount { return c.TxValue }
 func (c *TestCoin) PkScript() []byte      { return nil }
 func (c *TestCoin) NumConfs() int64       { return c.TxNumConfs }
 func (c *TestCoin) ValueAge() int64       { return int64(c.TxValue) * c.TxNumConfs }
 
-func NewCoin(index int64, value dcrutil.Amount, numConfs int64) coinset.Coin {
+func NewCoin(index int64, value hcutil.Amount, numConfs int64) coinset.Coin {
 	h := sha256.New()
 	h.Write([]byte(fmt.Sprintf("%d", index)))
 	hash, _ := chainhash.NewHash(h.Sum(nil))
@@ -47,7 +47,7 @@ func NewCoin(index int64, value dcrutil.Amount, numConfs int64) coinset.Coin {
 type coinSelectTest struct {
 	selector      coinset.CoinSelector
 	inputCoins    []coinset.Coin
-	targetValue   dcrutil.Amount
+	targetValue   hcutil.Amount
 	expectedCoins []coinset.Coin
 	expectedError error
 }
@@ -225,12 +225,12 @@ var (
 	testSimpleCoinNumConfs            = int64(1)
 	testSimpleCoinTxHash              = "fdc5aa15e3c9fdef4e6436f79ad334842b1596edae13e8b2450ab576dc5494f5"
 	testSimpleCoinTxHex               = "010000000101e4d1fdb04871f69d198701e8c8c410da20507a74c3ffc4dea00b4d7444491c0600000001ffffffff02318fbf070000000000001976a9148485ee5dba5ac084f12450f8ebac97e2114fc90088ace06735000000000000001976a914784ebee20805af80a526f8d7603bffd6355d6d1988ac000000000000000001f9faf40700000000c92a0000090000006b483045022100ae3188239dc0983de2cfd2ed47ce5996888ef3512ee0b88c6cd6e1996781277f022021d849fc851df171bd9b4b1304bd24aee4050c7bda111fddbd9ebf83faa8640c0121026eea31de604e54e9027e1913d82e3d7f072b9553fde5792d2ac2317b9babda31"
-	testSimpleCoinTxValue0            = dcrutil.Amount(129994545)
+	testSimpleCoinTxValue0            = hcutil.Amount(129994545)
 	testSimpleCoinTxValueAge0         = int64(testSimpleCoinTxValue0) * testSimpleCoinNumConfs
 	testSimpleCoinTxPkScript0Hex      = "76a9148485ee5dba5ac084f12450f8ebac97e2114fc90088ac"
 	testSimpleCoinTxPkScript0Bytes, _ = hex.DecodeString(testSimpleCoinTxPkScript0Hex)
 	testSimpleCoinTxBytes, _          = hex.DecodeString(testSimpleCoinTxHex)
-	testSimpleCoinTx, _               = dcrutil.NewTxFromBytes(testSimpleCoinTxBytes)
+	testSimpleCoinTx, _               = hcutil.NewTxFromBytes(testSimpleCoinTxBytes)
 	testSimpleCoin                    = &coinset.SimpleCoin{
 		Tx:         testSimpleCoinTx,
 		TxIndex:    0,

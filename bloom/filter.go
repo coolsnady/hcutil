@@ -13,7 +13,7 @@ import (
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	"github.com/coolsnady/hcd/txscript"
 	"github.com/coolsnady/hcd/wire"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 // ln2Squared is simply the square of the natural log of 2.
@@ -271,7 +271,7 @@ func (bf *Filter) maybeAddOutpoint(pkScrVer uint16, pkScript []byte, outHash *ch
 // update flags set via the loaded filter if needed.
 //
 // This function MUST be called with the filter lock held.
-func (bf *Filter) matchTxAndUpdate(tx *dcrutil.Tx) bool {
+func (bf *Filter) matchTxAndUpdate(tx *hcutil.Tx) bool {
 	// Check if the filter matches the hash of the transaction.
 	// This is useful for finding transactions when they appear in a block.
 	matched := bf.matches(tx.Hash()[:])
@@ -337,7 +337,7 @@ func (bf *Filter) matchTxAndUpdate(tx *dcrutil.Tx) bool {
 // update flags set via the loaded filter if needed.
 //
 // This function is safe for concurrent access.
-func (bf *Filter) MatchTxAndUpdate(tx *dcrutil.Tx) bool {
+func (bf *Filter) MatchTxAndUpdate(tx *hcutil.Tx) bool {
 	bf.mtx.Lock()
 	match := bf.matchTxAndUpdate(tx)
 	bf.mtx.Unlock()

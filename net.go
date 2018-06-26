@@ -5,7 +5,7 @@
 
 // +build !appengine
 
-package dcrutil
+package hcutil
 
 import (
 	"net"

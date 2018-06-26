@@ -36,11 +36,11 @@ To decode/encode an address:
 		"e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d57" +
 		"8a4c702b6bf11d5f"
 	defaultNet := &chaincfg.MainNetParams
-	addr, err := dcrutil.DecodeAddress(addrString, defaultNet)
+	addr, err := hcutil.DecodeAddress(addrString, defaultNet)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println(addr.EncodeAddress())
 */
-package dcrutil
+package hcutil

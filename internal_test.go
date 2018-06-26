@@ -10,7 +10,7 @@ cases which are either not possible or can't reliably be tested via the public
 interface. The functions are only exported while the tests are being run.
 */
 
-package dcrutil
+package hcutil
 
 import (
 	"github.com/coolsnady/hcd/chaincfg/chainec"

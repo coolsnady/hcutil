@@ -1,9 +1,9 @@
 hdkeychain
 ==========
 
-[![Build Status](http://img.shields.io/travis/decred/dcrutil.svg)](https://travis-ci.org/decred/dcrutil)
+[![Build Status](http://img.shields.io/travis/coolsnady/hcutil.svg)](https://travis-ci.org/coolsnady/hcutil)
 [![ISC License](http://img.shields.io/badge/license-ISC-blue.svg)](http://copyfree.org)
-[![GoDoc](http://img.shields.io/badge/godoc-reference-blue.svg)](http://godoc.org/github.com/decred/dcrutil/hdkeychain)
+[![GoDoc](http://img.shields.io/badge/godoc-reference-blue.svg)](http://godoc.org/github.com/coolsnady/hcutil/hdkeychain)
 
 Package hdkeychain provides an API for Decred hierarchical deterministic
 extended keys (based on BIP0032).
@@ -24,7 +24,7 @@ report.
   keys
 - Support for custom networks by registering them with chaincfg
 - Obtaining the underlying EC pubkeys, EC privkeys, and associated decred
-  addresses ties in seamlessly with existing btcec and dcrutil types which
+  addresses ties in seamlessly with existing btcec and hcutil types which
   provide powerful tools for working with them to do things like sign
   transations and generate payment scripts
 - Uses the btcec package which is highly optimized for secp256k1
@@ -39,18 +39,18 @@ report.
 ## Installation and Updating
 
 ```bash
-$ go get -u github.com/decred/dcrutil/hdkeychain
+$ go get -u github.com/coolsnady/hcutil/hdkeychain
 ```
 
 ## Examples
 
-* [NewMaster Example](http://godoc.org/github.com/decred/dcrutil/hdkeychain#example-NewMaster)  
+* [NewMaster Example](http://godoc.org/github.com/coolsnady/hcutil/hdkeychain#example-NewMaster)  
   Demonstrates how to generate a cryptographically random seed then use it to
   create a new master node (extended key).
-* [Default Wallet Layout Example](http://godoc.org/github.com/decred/dcrutil/hdkeychain#example-package--DefaultWalletLayout)  
+* [Default Wallet Layout Example](http://godoc.org/github.com/coolsnady/hcutil/hdkeychain#example-package--DefaultWalletLayout)  
   Demonstrates the default hierarchical deterministic wallet layout as described
   in BIP0032.
-* [Audits Use Case Example](http://godoc.org/github.com/decred/dcrutil/hdkeychain#example-package--Audits)  
+* [Audits Use Case Example](http://godoc.org/github.com/coolsnady/hcutil/hdkeychain#example-package--Audits)  
   Demonstrates the audits use case in BIP0032.
 
 ## License

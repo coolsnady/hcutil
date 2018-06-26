@@ -23,5 +23,5 @@ $ go get -u github.com/coolsnady/hcutil
 
 ## License
 
-Package hcutil, like dcrutil is licensed under the [copyfree](http://copyfree.org) ISC
+Package hcutil, like hcutil is licensed under the [copyfree](http://copyfree.org) ISC
 License.

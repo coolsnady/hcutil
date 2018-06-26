@@ -17,7 +17,7 @@ set -ex
 
 #Default GOVERSION
 GOVERSION=${1:-1.8}
-REPO=dcrutil
+REPO=hcutil
 
 TESTCMD="test -z \"\$(gometalinter --disable-all \
   --enable=gofmt \

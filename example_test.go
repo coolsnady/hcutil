@@ -1,21 +1,21 @@
-package dcrutil_test
+package hcutil_test
 
 import (
 	"fmt"
 	"math"
 
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 func ExampleAmount() {
 
-	a := dcrutil.Amount(0)
+	a := hcutil.Amount(0)
 	fmt.Println("Zero Atom:", a)
 
-	a = dcrutil.Amount(1e8)
+	a = hcutil.Amount(1e8)
 	fmt.Println("100,000,000 Atoms:", a)
 
-	a = dcrutil.Amount(1e5)
+	a = hcutil.Amount(1e5)
 	fmt.Println("100,000 Atoms:", a)
 	// Output:
 	// Zero Atom: 0 DCR
@@ -24,28 +24,28 @@ func ExampleAmount() {
 }
 
 func ExampleNewAmount() {
-	amountOne, err := dcrutil.NewAmount(1)
+	amountOne, err := hcutil.NewAmount(1)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println(amountOne) //Output 1
 
-	amountFraction, err := dcrutil.NewAmount(0.01234567)
+	amountFraction, err := hcutil.NewAmount(0.01234567)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println(amountFraction) //Output 2
 
-	amountZero, err := dcrutil.NewAmount(0)
+	amountZero, err := hcutil.NewAmount(0)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println(amountZero) //Output 3
 
-	amountNaN, err := dcrutil.NewAmount(math.NaN())
+	amountNaN, err := hcutil.NewAmount(math.NaN())
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -59,13 +59,13 @@ func ExampleNewAmount() {
 }
 
 func ExampleAmount_unitConversions() {
-	amount := dcrutil.Amount(44433322211100)
+	amount := hcutil.Amount(44433322211100)
 
-	fmt.Println("Atom to kCoin:", amount.Format(dcrutil.AmountKiloCoin))
+	fmt.Println("Atom to kCoin:", amount.Format(hcutil.AmountKiloCoin))
 	fmt.Println("Atom to Coin:", amount)
-	fmt.Println("Atom to MilliCoin:", amount.Format(dcrutil.AmountMilliCoin))
-	fmt.Println("Atom to MicroCoin:", amount.Format(dcrutil.AmountMicroCoin))
-	fmt.Println("Atom to Atom:", amount.Format(dcrutil.AmountAtom))
+	fmt.Println("Atom to MilliCoin:", amount.Format(hcutil.AmountMilliCoin))
+	fmt.Println("Atom to MicroCoin:", amount.Format(hcutil.AmountMicroCoin))
+	fmt.Println("Atom to Atom:", amount.Format(hcutil.AmountAtom))
 
 	// Output:
 	// Atom to kCoin: 444.333222111 kDCR

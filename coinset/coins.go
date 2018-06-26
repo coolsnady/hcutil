@@ -12,14 +12,14 @@ import (
 
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	"github.com/coolsnady/hcd/wire"
-	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil"
 )
 
 // Coin represents a spendable transaction outpoint
 type Coin interface {
 	Hash() *chainhash.Hash
 	Index() uint32
-	Value() dcrutil.Amount
+	Value() hcutil.Amount
 	PkScript() []byte
 	NumConfs() int64
 	ValueAge() int64
@@ -40,7 +40,7 @@ type Coins interface {
 // the CoinSet, otherwise the cached values will be incorrect.
 type CoinSet struct {
 	coinList      *list.List
-	totalValue    dcrutil.Amount
+	totalValue    hcutil.Amount
 	totalValueAge int64
 }
 
@@ -71,7 +71,7 @@ func (cs *CoinSet) Coins() []Coin {
 }
 
 // TotalValue returns the total value of the coins in the set.
-func (cs *CoinSet) TotalValue() (value dcrutil.Amount) {
+func (cs *CoinSet) TotalValue() (value hcutil.Amount) {
 	return cs.totalValue
 }
 
@@ -150,7 +150,7 @@ var (
 
 // satisfiesTargetValue checks that the totalValue is either exactly the targetValue
 // or is greater than the targetValue by at least the minChange amount.
-func satisfiesTargetValue(targetValue, minChange, totalValue dcrutil.Amount) bool {
+func satisfiesTargetValue(targetValue, minChange, totalValue hcutil.Amount) bool {
 	return (totalValue == targetValue || totalValue >= targetValue+minChange)
 }
 
@@ -166,7 +166,7 @@ func satisfiesTargetValue(targetValue, minChange, totalValue dcrutil.Amount) boo
 // It is important to note that the Coins being used as inputs need to have
 // a constant ValueAge() during the execution of CoinSelect.
 type CoinSelector interface {
-	CoinSelect(targetValue dcrutil.Amount, coins []Coin) (Coins, error)
+	CoinSelect(targetValue hcutil.Amount, coins []Coin) (Coins, error)
 }
 
 // MinIndexCoinSelector is a CoinSelector that attempts to construct a
@@ -174,12 +174,12 @@ type CoinSelector interface {
 // any number of lower indexes (as in the ordered array) over higher ones.
 type MinIndexCoinSelector struct {
 	MaxInputs       int
-	MinChangeAmount dcrutil.Amount
+	MinChangeAmount hcutil.Amount
 }
 
 // CoinSelect will attempt to select coins using the algorithm described
 // in the MinIndexCoinSelector struct.
-func (s MinIndexCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Coin) (Coins, error) {
+func (s MinIndexCoinSelector) CoinSelect(targetValue hcutil.Amount, coins []Coin) (Coins, error) {
 	cs := NewCoinSet(nil)
 	for n := 0; n < len(coins) && n < s.MaxInputs; n++ {
 		cs.PushCoin(coins[n])
@@ -195,12 +195,12 @@ func (s MinIndexCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Coi
 // that uses as few of the inputs as possible.
 type MinNumberCoinSelector struct {
 	MaxInputs       int
-	MinChangeAmount dcrutil.Amount
+	MinChangeAmount hcutil.Amount
 }
 
 // CoinSelect will attempt to select coins using the algorithm described
 // in the MinNumberCoinSelector struct.
-func (s MinNumberCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Coin) (Coins, error) {
+func (s MinNumberCoinSelector) CoinSelect(targetValue hcutil.Amount, coins []Coin) (Coins, error) {
 	sortedCoins := make([]Coin, 0, len(coins))
 	sortedCoins = append(sortedCoins, coins...)
 	sort.Sort(sort.Reverse(byAmount(sortedCoins)))
@@ -219,12 +219,12 @@ func (s MinNumberCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Co
 // block.
 type MaxValueAgeCoinSelector struct {
 	MaxInputs       int
-	MinChangeAmount dcrutil.Amount
+	MinChangeAmount hcutil.Amount
 }
 
 // CoinSelect will attempt to select coins using the algorithm described
 // in the MaxValueAgeCoinSelector struct.
-func (s MaxValueAgeCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Coin) (Coins, error) {
+func (s MaxValueAgeCoinSelector) CoinSelect(targetValue hcutil.Amount, coins []Coin) (Coins, error) {
 	sortedCoins := make([]Coin, 0, len(coins))
 	sortedCoins = append(sortedCoins, coins...)
 	sort.Sort(sort.Reverse(byValueAge(sortedCoins)))
@@ -246,13 +246,13 @@ func (s MaxValueAgeCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []
 //
 type MinPriorityCoinSelector struct {
 	MaxInputs              int
-	MinChangeAmount        dcrutil.Amount
+	MinChangeAmount        hcutil.Amount
 	MinAvgValueAgePerInput int64
 }
 
 // CoinSelect will attempt to select coins using the algorithm described
 // in the MinPriorityCoinSelector struct.
-func (s MinPriorityCoinSelector) CoinSelect(targetValue dcrutil.Amount, coins []Coin) (Coins, error) {
+func (s MinPriorityCoinSelector) CoinSelect(targetValue hcutil.Amount, coins []Coin) (Coins, error) {
 	possibleCoins := make([]Coin, 0, len(coins))
 	possibleCoins = append(possibleCoins, coins...)
 
@@ -351,7 +351,7 @@ func (a byAmount) Less(i, j int) bool { return a[i].Value() < a[j].Value() }
 // btcutil.Tx, a specific outpoint index, and the number of confirmations
 // that transaction has had.
 type SimpleCoin struct {
-	Tx         *dcrutil.Tx
+	Tx         *hcutil.Tx
 	TxIndex    uint32
 	TxNumConfs int64
 }
@@ -375,8 +375,8 @@ func (c *SimpleCoin) txOut() *wire.TxOut {
 }
 
 // Value returns the value of the Coin
-func (c *SimpleCoin) Value() dcrutil.Amount {
-	return dcrutil.Amount(c.txOut().Value)
+func (c *SimpleCoin) Value() hcutil.Amount {
+	return hcutil.Amount(c.txOut().Value)
 }
 
 // PkScript returns the outpoint script of the Coin.
