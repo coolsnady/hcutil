@@ -20,14 +20,14 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/hybridnetwork/hxd/chaincfg"
-	"github.com/hybridnetwork/hxd/chaincfg/chainec"
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	dcrcrypto "github.com/hybridnetwork/hxd/crypto/bliss"
-	dcrutil "github.com/hybridnetwork/hxutil"
-	"github.com/hybridnetwork/hxutil/base58"
-	"github.com/hybridnetwork/bliss"
-	"github.com/hybridnetwork/bliss/sampler"
+	"github.com/coolsnady/hcd/chaincfg"
+	"github.com/coolsnady/hcd/chaincfg/chainec"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	dcrcrypto "github.com/coolsnady/hcd/crypto/bliss"
+	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil/base58"
+	"github.com/coolsnady/bliss"
+	"github.com/coolsnady/bliss/sampler"
 	"golang.org/x/crypto/sha3"
 )
 

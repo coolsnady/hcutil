@@ -13,8 +13,8 @@ interface. The functions are only exported while the tests are being run.
 package dcrutil
 
 import (
-	"github.com/hybridnetwork/hxd/chaincfg/chainec"
-	"github.com/hybridnetwork/hxutil/base58"
+	"github.com/coolsnady/hcd/chaincfg/chainec"
+	"github.com/coolsnady/hcutil/base58"
 
 	"golang.org/x/crypto/ripemd160"
 )

@@ -10,10 +10,10 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
-	"github.com/hybridnetwork/hxutil/bloom"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil/bloom"
 )
 
 func TestMerkleBlock3(t *testing.T) {

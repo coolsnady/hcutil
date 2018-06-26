@@ -13,7 +13,7 @@ import (
 	"testing"
 	"unicode"
 
-	dcrutil "github.com/hybridnetwork/hxutil"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // TestAppDataDir tests the API for AppDataDir to ensure it gives expected

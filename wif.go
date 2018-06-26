@@ -9,11 +9,11 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/hybridnetwork/hxd/chaincfg"
-	"github.com/hybridnetwork/hxd/chaincfg/chainec"
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/crypto/bliss"
-	"github.com/hybridnetwork/hxutil/base58"
+	"github.com/coolsnady/hcd/chaincfg"
+	"github.com/coolsnady/hcd/chaincfg/chainec"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/crypto/bliss"
+	"github.com/coolsnady/hcutil/base58"
 )
 
 // ErrMalformedPrivateKey describes an error where a WIF-encoded private

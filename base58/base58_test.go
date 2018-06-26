@@ -10,7 +10,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/hybridnetwork/hxutil/base58"
+	"github.com/coolsnady/hcutil/base58"
 )
 
 var stringTests = []struct {

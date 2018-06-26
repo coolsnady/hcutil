@@ -10,9 +10,9 @@ import (
 	"errors"
 	"sort"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // Coin represents a spendable transaction outpoint

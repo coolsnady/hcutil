@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	dcrutil "github.com/hybridnetwork/hxutil"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // TestNewTLSCertPair ensures the NewTLSCertPair function works as expected.

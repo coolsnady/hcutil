@@ -11,7 +11,7 @@ import (
 	"sort"
 	"testing"
 
-	. "github.com/hybridnetwork/hxutil"
+	. "github.com/coolsnady/hcutil"
 )
 
 func TestAmountCreation(t *testing.T) {

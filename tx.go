@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/wire"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/wire"
 )
 
 // assertTransactionImmutability throws a panic when a transaction has been

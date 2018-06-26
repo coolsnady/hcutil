@@ -8,7 +8,7 @@ package base58
 import (
 	"errors"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
 )
 
 // ErrChecksum indicates that the checksum of a check-encoded string does not verify against

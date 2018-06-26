@@ -8,8 +8,8 @@ package hdkeychain_test
 import (
 	"fmt"
 
-	"github.com/hybridnetwork/hxd/chaincfg"
-	"github.com/hybridnetwork/hxutil/hdkeychain"
+	"github.com/coolsnady/hcd/chaincfg"
+	"github.com/coolsnady/hcutil/hdkeychain"
 )
 
 // This example demonstrates how to generate a cryptographically random seed

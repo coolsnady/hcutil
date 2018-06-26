@@ -12,10 +12,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/hybridnetwork/hxd/chaincfg"
-	"github.com/hybridnetwork/hxd/chaincfg/chainec"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg"
+	"github.com/coolsnady/hcd/chaincfg/chainec"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
 
 	"golang.org/x/crypto/ripemd160"
 )
@@ -241,7 +241,7 @@ func TestAddresses(t *testing.T) {
 			},
 			net: &chaincfg.MainNetParams,
 		},
-		// Hybrid, uncompressed and compressed key types are supported, dcrd consensus rules require a compressed key type however.
+		// Hybrid, uncompressed and compressed key types are supported, hcd consensus rules require a compressed key type however.
 		{
 			name:    "mainnet p2pk uncompressed (0x04)",
 			addr:    "DkM3EyZ546GghVSkvzb6J47PvGDyntqiDtFgipQhNj78Xm2mUYRpf",

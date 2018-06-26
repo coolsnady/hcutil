@@ -12,8 +12,8 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // TestTx tests the API for Tx.

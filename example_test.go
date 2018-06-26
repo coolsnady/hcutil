@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	dcrutil "github.com/hybridnetwork/hxutil"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 func ExampleAmount() {

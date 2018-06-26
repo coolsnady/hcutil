@@ -10,10 +10,10 @@ import (
 	"math"
 	"sync"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	"github.com/hybridnetwork/hxd/txscript"
-	"github.com/hybridnetwork/hxd/wire"
-	dcrutil "github.com/hybridnetwork/hxutil"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	"github.com/coolsnady/hcd/txscript"
+	"github.com/coolsnady/hcd/wire"
+	dcrutil "github.com/coolsnady/hcutil"
 )
 
 // ln2Squared is simply the square of the natural log of 2.

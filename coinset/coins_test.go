@@ -12,9 +12,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hybridnetwork/hxd/chaincfg/chainhash"
-	dcrutil "github.com/hybridnetwork/hxutil"
-	"github.com/hybridnetwork/hxutil/coinset"
+	"github.com/coolsnady/hcd/chaincfg/chainhash"
+	dcrutil "github.com/coolsnady/hcutil"
+	"github.com/coolsnady/hcutil/coinset"
 )
 
 type TestCoin struct {

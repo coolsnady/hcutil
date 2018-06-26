@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file.
 
 /*
-Package hxutil provides hx-specific convenience functions and types.
+Package hcutil provides hx-specific convenience functions and types.
 
 Block Overview
 

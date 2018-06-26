@@ -38,7 +38,7 @@ func (u AmountUnit) String() string {
 	case AmountKiloCoin:
 		return "kHX"
 	case AmountCoin:
-		return "HX"
+		return "HC"
 	case AmountMilliCoin:
 		return "mHX"
 	case AmountMicroCoin:
@@ -46,7 +46,7 @@ func (u AmountUnit) String() string {
 	case AmountAtom:
 		return "Atom"
 	default:
-		return "1e" + strconv.FormatInt(int64(u), 10) + " HX"
+		return "1e" + strconv.FormatInt(int64(u), 10) + " HC"
 	}
 }
 
