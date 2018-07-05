@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2016 The btcsuite developers
-// Copyright (c) 2015-2016 The Hcd developers
+// Copyright (c) 2015-2016 The Decred developers
+// Copyright (c) 2018-2020 The Hcd developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -20,14 +21,14 @@ import (
 	"math/big"
 	"strings"
 
+	"github.com/coolsnady/bliss"
+	"github.com/coolsnady/bliss/sampler"
 	"github.com/coolsnady/hcd/chaincfg"
 	"github.com/coolsnady/hcd/chaincfg/chainec"
 	"github.com/coolsnady/hcd/chaincfg/chainhash"
 	dcrcrypto "github.com/coolsnady/hcd/crypto/bliss"
 	"github.com/coolsnady/hcutil"
 	"github.com/coolsnady/hcutil/base58"
-	"github.com/coolsnady/bliss"
-	"github.com/coolsnady/bliss/sampler"
 	"golang.org/x/crypto/sha3"
 )
 

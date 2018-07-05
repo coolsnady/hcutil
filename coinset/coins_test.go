@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2016 The btcsuite developers
-// Copyright (c) 2015-2016 The Hcd developers
+// Copyright (c) 2015-2016 The Decred developers
+// Copyright (c) 2018-2020 The Hcd developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -26,7 +27,7 @@ type TestCoin struct {
 
 func (c *TestCoin) Hash() *chainhash.Hash { return c.TxHash }
 func (c *TestCoin) Index() uint32         { return c.TxIndex }
-func (c *TestCoin) Value() hcutil.Amount { return c.TxValue }
+func (c *TestCoin) Value() hcutil.Amount  { return c.TxValue }
 func (c *TestCoin) PkScript() []byte      { return nil }
 func (c *TestCoin) NumConfs() int64       { return c.TxNumConfs }
 func (c *TestCoin) ValueAge() int64       { return int64(c.TxValue) * c.TxNumConfs }
