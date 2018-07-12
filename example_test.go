@@ -68,9 +68,9 @@ func ExampleAmount_unitConversions() {
 	fmt.Println("Atom to Atom:", amount.Format(hcutil.AmountAtom))
 
 	// Output:
-	// Atom to kCoin: 444.333222111 kDCR
+	// Atom to kCoin: 444.333222111 kHC
 	// Atom to Coin: 444333.222111 HC
-	// Atom to MilliCoin: 444333222.111 mDCR
-	// Atom to MicroCoin: 444333222111 μDCR
+	// Atom to MilliCoin: 444333222.111 mHC
+	// Atom to MicroCoin: 444333222111 μHC
 	// Atom to Atom: 44433322211100 Atom
 }

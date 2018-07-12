@@ -123,18 +123,18 @@ func TestAmountUnitConversions(t *testing.T) {
 		s         string
 	}{
 		{
-			name:      "MDCR",
+			name:      "MHC",
 			amount:    MaxAmount,
 			unit:      AmountMegaCoin,
 			converted: 21,
-			s:         "21 MDCR",
+			s:         "21 MHC",
 		},
 		{
-			name:      "kDCR",
+			name:      "kHC",
 			amount:    44433322211100,
 			unit:      AmountKiloCoin,
 			converted: 444.33322211100,
-			s:         "444.333222111 kDCR",
+			s:         "444.333222111 kHC",
 		},
 		{
 			name:      "Coin",
@@ -144,19 +144,19 @@ func TestAmountUnitConversions(t *testing.T) {
 			s:         "444333.222111 HC",
 		},
 		{
-			name:      "mDCR",
+			name:      "mHC",
 			amount:    44433322211100,
 			unit:      AmountMilliCoin,
 			converted: 444333222.11100,
-			s:         "444333222.111 mDCR",
+			s:         "444333222.111 mHC",
 		},
 		{
 
-			name:      "μDCR",
+			name:      "μHC",
 			amount:    44433322211100,
 			unit:      AmountMicroCoin,
 			converted: 444333222111.00,
-			s:         "444333222111 μDCR",
+			s:         "444333222111 μHC",
 		},
 		{
 
