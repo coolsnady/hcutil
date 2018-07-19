@@ -181,7 +181,8 @@ func DecodeAddress(addr string) (Address, error) {
 	switch netID {
 	case net.PubKeyAddrID:
 		return NewAddressPubKey(decoded, net)
-
+	case net.PubKeyBlissAddrID:
+		return NewAddressBlissPubKey(decoded, net)
 	case net.PubKeyHashAddrID:
 		return NewAddressPubKeyHash(decoded, net, chainec.ECTypeSecp256k1)
 
@@ -288,7 +289,6 @@ func (a *AddressPubKeyHash) ScriptAddress() []byte {
 func (a *AddressPubKeyHash) IsForNet(net *chaincfg.Params) bool {
 	return a.netID == net.PubKeyHashAddrID ||
 		a.netID == net.PKHEdwardsAddrID ||
-		a.netID == net.PKHSchnorrAddrID ||
 		a.netID == net.PKHSchnorrAddrID ||
 		a.netID == net.PKHBlissAddrID
 }
@@ -857,4 +857,9 @@ func (a *AddressBlissPubKey) DSA(net *chaincfg.Params) int {
 // Net returns the network for the address.
 func (a *AddressBlissPubKey) Net() *chaincfg.Params {
 	return a.net
+}
+
+// NewAddressSecpPubKeyCompressed creates a new address using a compressed public key
+func NewAddressBlissPubKeyCompressed(pubkey chainec.PublicKey, params *chaincfg.Params) (*AddressBlissPubKey, error) {
+	return NewAddressBlissPubKey(pubkey.SerializeCompressed(), params)
 }
